@@ -26,8 +26,7 @@ export class ApiService {
         if (page) {
             params = params.append('page', page);
         }
-        console.log(this.httpOptions);
-        console.log(params);
+
         return this.http.get(this.api, { headers: this.httpOptions.headers, params: params }).pipe(catchError(this.handleError));
     }
 

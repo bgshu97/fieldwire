@@ -40,16 +40,11 @@ export class AppComponent {
   search() {
     this.links = [];
     this.page = 1;
-    console.log(this.searchQuery);
-    console.log(this.sort);
-    console.log(this.window);
+
     this.getAll(this.searchQuery, this.sort, this.window, this.page);
   }
 
   zoom(index) {
-    var image = document.getElementById(index);
-    console.log(image);
-
     var modal = document.getElementById('myModal');
     var modalImg = document.getElementById('img1');
     var modalVid = document.getElementById('vid1');
