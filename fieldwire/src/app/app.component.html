@@ -1,0 +1,50 @@
+<h1>FieldWire Image Search</h1>
+<input type="text" id="searchQuery" name="searchQuery" [(ngModel)]="searchQuery">
+<button (click)="search()">Search</button>
+<br>
+<b>Sort by: </b>
+<input [(ngModel)]="sort" type="radio" id="time" name="sort" value="Time">
+<label for="time">Time</label>
+<input [(ngModel)]="sort" type="radio" id="viral" name="sort" value="Viral">
+<label for="viral">Viral</label>
+<input [(ngModel)]="sort" type="radio" id="top" name="sort" value="Top">
+<label for="top">Top</label>
+<br>
+<div *ngIf="sort === 'Top'">
+  <b>Date Range: </b>
+  <input [(ngModel)]="window" type="radio" id="day" name="window" value="Day">
+  <label for="day">Day</label>
+  <input [(ngModel)]="window" type="radio" id="week" name="window" value="Week">
+  <label for="week">Week</label>
+  <input [(ngModel)]="window" type="radio" id="month" name="window" value="Month">
+  <label for="month">Month</label>
+  <input [(ngModel)]="window" type="radio" id="year" name="window" value="Year">
+  <label for="year">Year</label>
+  <input [(ngModel)]="window" type="radio" id="all" name="window" value="All">
+  <label for="all">All</label>
+</div>
+<br>
+<div *ngIf="links.length !== 0">
+  <button [disabled]="page === 1" (click)="previousPage()">--Previous Page </button>
+  {{page}}
+  <button (click)="nextPage()">Next Page--</button>
+</div>
+<div class="image-screen">
+  <div class="image-container" *ngFor="let link of links" id="{{link}}" (click)="zoom(link)">
+    <div *ngIf="link.endsWith('.mp4'); else elseBlock">
+      <video width="300" height="300" controls>
+        <source [src]="link" type="video/mp4">
+      </video>
+    </div>
+    <ng-template #elseBlock>
+      <img class="image" [src]="link" />
+    </ng-template>
+  </div>
+  <div id="myModal" class="modal" (click)="closeImage()">
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" id="img1">
+    <video id="vidContainer" class="modal-content" controls>
+      <source id="vid1" type="video/mp4">
+    </video>
+  </div>
+</div>
